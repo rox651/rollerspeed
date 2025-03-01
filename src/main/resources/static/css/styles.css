@@ -579,6 +579,128 @@ nav ul li a:hover {
   margin-bottom: 0.5rem;
 }
 
+.services-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/images/services.jpg") center/cover;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-top: 80px;
+  margin-bottom: 3rem;
+}
+
+.services-hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.services-hero-subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.bento-item {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.bento-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Grid Layout */
+.main-service {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: var(--primary-color);
+  color: white;
+}
+
+.stats {
+  background: var(--dark-color);
+  color: white;
+}
+
+.experience {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.programs {
+  grid-column: span 2;
+  background: var(--primary-color);
+  color: white;
+}
+
+.coaches {
+  background: var(--dark-color);
+  color: white;
+}
+
+.facilities {
+  grid-column: span 2;
+  background: var(--dark-color);
+  color: white;
+}
+
+.schedule {
+  background: var(--tertiary-color);
+}
+
+.main-service h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.service-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.stat h3 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.facility-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.schedule-indicator {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.time-slot {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
 /* Footer */
 footer {
   background: var(--dark-color);
@@ -641,6 +763,19 @@ footer {
 
   /* Vision */
   .vision-goals {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Servicios */
+
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Servicios */
+  .bento-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -803,6 +938,35 @@ footer {
   .value-applications {
     padding: 1rem;
   }
+
+  /* Servicios */
+
+  .services-hero {
+    height: var(--height-hero);
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-service,
+  .programs,
+  .facilities {
+    grid-column: span 1;
+  }
+
+  .coaches {
+    grid-row: span 1;
+  }
+
+  .services-hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .services-hero-subtitle {
+    font-size: 1.4rem;
+  }
+
   /* Footer */
 
   .footer-content {

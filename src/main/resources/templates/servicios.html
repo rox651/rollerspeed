@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Servicios')}"> </head>
+  <body>
+    <header th:replace="~{fragments/layout :: navbar('servicios')}"></header>
+
+    <section class="services-hero">
+      <div class="services-hero-content">
+        <h1>Nuestros Servicios</h1>
+        <p class="services-hero-subtitle">Formación integral en patinaje</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="bento-grid">
+        <div class="bento-item main-service">
+          <h2>Escuela de Patinaje</h2>
+          <p>Formación profesional para todas las edades y niveles</p>
+          <img
+            src="/images/main-service.jpg"
+            alt="Patinaje profesional"
+            class="service-image"
+          />
+        </div>
+
+        <div class="bento-item stats">
+          <div class="stat">
+            <h3>500+</h3>
+            <p>Estudiantes formados</p>
+          </div>
+        </div>
+
+        <div class="bento-item experience">
+          <h3>15 años</h3>
+          <p>de experiencia en formación</p>
+        </div>
+
+        <div class="bento-item programs">
+          <h3>Programas de Entrenamiento</h3>
+          <ul>
+            <li>Iniciación al patinaje</li>
+            <li>Nivel intermedio</li>
+            <li>Competición</li>
+            <li>Alto rendimiento</li>
+          </ul>
+        </div>
+
+        <div class="bento-item coaches">
+          <h3>Equipo de Entrenadores</h3>
+          <p>Profesionales certificados</p>
+        </div>
+
+        <div class="bento-item facilities">
+          <h3>Instalaciones</h3>
+          <p>Pista profesional con equipamiento de última generación</p>
+          <img
+            src="/images/facilities.jpg"
+            alt="Instalaciones"
+            class="facility-image"
+          />
+        </div>
+
+        <div class="bento-item schedule">
+          <h3>Horarios Flexibles</h3>
+          <p>Mañana | Tarde | Noche</p>
+          <div class="schedule-indicator">
+            <div class="time-slot">AM</div>
+            <div class="time-slot">PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>
