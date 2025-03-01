@@ -7,6 +7,7 @@
   --success-color: #4caf50;
   --danger-color: #f44336;
   --max-width: 1280px;
+  --height-hero: 600px;
   --font-geist: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, sans-serif;
 }
@@ -168,7 +169,7 @@ nav ul li a:hover {
 .mission-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/images/mision.jpg") center/cover;
-  height: 600px;
+  height: var(--height-hero);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,6 +247,122 @@ nav ul li a:hover {
   margin-bottom: 3rem;
 }
 
+/* Vision  */
+.vision-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/images/vision.jpg") center/cover;
+  height: var(--height-hero);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-top: 80px;
+  margin-bottom: 3rem;
+}
+
+.vision-hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.vision-hero-subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.vision-container {
+  margin-bottom: 4rem;
+}
+
+.vision-main-card {
+  background: white;
+  border-radius: 10px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  grid-column: span 2;
+}
+
+.vision-text {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: var(--dark-color);
+  margin-bottom: 2rem;
+}
+
+.vision-goals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.vision-goal-item {
+  background: var(--light-color);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vision-goal-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary-color);
+  grid-column: auto;
+}
+
+.vision-goal-item:nth-child(3) {
+  grid-column: 1 / 4;
+}
+
+.vision-goal-item:hover {
+  transform: translateY(-5px);
+}
+
+.vision-goal-item svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.vision-goal-item h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.vision-goal-item p {
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+.vision-future {
+  background: var(--secondary-color);
+  color: white;
+  border-radius: 10px;
+  padding: 3rem;
+  grid-column: span 2;
+}
+
+.vision-future h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--tertiary-color);
+}
+
+.vision-future p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
 /* Footer */
 footer {
   background: var(--dark-color);
@@ -305,9 +422,17 @@ footer {
   .mission-objectives {
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   }
+
+  /* Vision */
+  .vision-goals {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 800px) {
+  :root {
+    --height-hero: 500px;
+  }
   /* Header  */
   header {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -327,7 +452,7 @@ footer {
   }
 
   nav ul li {
-    margin: 5px 10px;
+    font-size: 0.9rem;
   }
 
   /* Hero */
@@ -338,7 +463,7 @@ footer {
   /* Mision */
 
   .mission-hero {
-    height: 200px;
+    height: var(--height-hero);
   }
 
   .mission-hero-content h1 {
@@ -353,6 +478,53 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .mission-objective-item {
+    padding: 1rem;
+  }
+
+  .mission-main-card {
+    padding: 1rem;
+  }
+
+  .mission-commitment {
+    padding: 1rem;
+  }
+
+  /* Vision */
+  .vision-hero {
+    height: var(--height-hero);
+  }
+
+  .vision-hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .vision-hero-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .vision-main-card {
+    grid-column: span 1;
+    padding: 1rem;
+  }
+
+  .vision-goals {
+    grid-template-columns: 1fr;
+  }
+
+  .vision-goal-item:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .vision-future {
+    grid-column: span 1;
+    padding: 1.5rem;
+  }
+
+  .vision-text {
+    font-size: 1.2rem;
+    text-align: center;
+  }
   /* Footer */
 
   .footer-content {
