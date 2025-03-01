@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Inicio')}"> </head>
+  <body>
+    <nav th:replace="~{fragments/layout :: navbar('inicio')}"></nav>
+
+    <section id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h2>Aprende a patinar con los mejores</h2>
+          <p>Escuela de patinaje en Santa Marta, Colombia</p>
+          <a href="#inscripcion" class="btn">¡Inscríbete ahora!</a>
+        </div>
+      </div>
+    </section>
+    <!--   
+    
+  
+      <section id="services">
+        <div class="container">
+          <h2 class="section-title">Nuestros Servicios</h2>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">🛼</div>
+              <h3>Clases para Principiantes</h3>
+              <p>Aprende las técnicas básicas del patinaje en un entorno seguro y divertido.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">🏆</div>
+              <h3>Entrenamiento Competitivo</h3>
+              <p>Preparación especializada para competiciones regionales y nacionales.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">👶</div>
+              <h3>Patinaje Infantil</h3>
+              <p>Clases adaptadas para niños desde los 4 años con enfoque lúdico y educativo.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">👨‍👩‍👧‍👦</div>
+              <h3>Clases Familiares</h3>
+              <p>Sesiones donde padres e hijos pueden aprender juntos y compartir la experiencia.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <section id="horarios">
+        <div class="container">
+          <h2 class="section-title">Horarios de Clases</h2>
+          <div class="schedule-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Día</th>
+                  <th>Mañana</th>
+                  <th>Tarde</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lunes</td>
+                  <td>9:00 - 11:00<br><span>Principiantes</span></td>
+                  <td>15:00 - 17:00<br><span>Avanzados</span></td>
+                </tr>
+                <tr>
+                  <td>Martes</td>
+                  <td>9:00 - 11:00<br><span>Infantil</span></td>
+                  <td>15:00 - 17:00<br><span>Competición</span></td>
+                </tr>
+                <tr>
+                  <td>Miércoles</td>
+                  <td>9:00 - 11:00<br><span>Principiantes</span></td>
+                  <td>15:00 - 17:00<br><span>Avanzados</span></td>
+                </tr>
+                <tr>
+                  <td>Jueves</td>
+                  <td>9:00 - 11:00<br><span>Infantil</span></td>
+                  <td>15:00 - 17:00<br><span>Competición</span></td>
+                </tr>
+                <tr>
+                  <td>Viernes</td>
+                  <td>9:00 - 11:00<br><span>Principiantes</span></td>
+                  <td>15:00 - 17:00<br><span>Familiar</span></td>
+                </tr>
+                <tr>
+                  <td>Sábado</td>
+                  <td>8:00 - 12:00<br><span>Todos los niveles</span></td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+  
+      <section id="eventos">
+        <div class="container">
+          <h2 class="section-title">Próximos Eventos</h2>
+          <div class="events-list">
+            <div class="event-card">
+              <div class="event-date">
+                <span class="day">15</span>
+                <span class="month">Oct</span>
+              </div>
+              <div class="event-details">
+                <h3>Exhibición de Patinaje</h3>
+                <p class="event-location">Parque de los Novios, Santa Marta</p>
+                <p>Nuestros patinadores mostrarán sus habilidades en una exhibición abierta al público.</p>
+              </div>
+            </div>
+            <div class="event-card">
+              <div class="event-date">
+                <span class="day">20</span>
+                <span class="month">Nov</span>
+              </div>
+              <div class="event-details">
+                <h3>Competencia Regional</h3>
+                <p class="event-location">Polideportivo Municipal</p>
+                <p>Participación en la competencia regional de patinaje de velocidad.</p>
+              </div>
+            </div>
+            <div class="event-card">
+              <div class="event-date">
+                <span class="day">10</span>
+                <span class="month">Dic</span>
+              </div>
+              <div class="event-details">
+                <h3>Festival de Fin de Año</h3>
+                <p class="event-location">Pista de Patinaje Roller Speed</p>
+                <p>Celebración de fin de año con demostraciones, juegos y premios para todos los alumnos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <section id="inscripcion">
+        <div class="container">
+          <h2 class="section-title">Inscripción</h2>
+          <div class="form-container">
+            <form id="inscription-form">
+              <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" required>
+              </div>
+              <div class="form-group">
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" name="edad" min="4" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required>
+              </div>
+              <div class="form-group">
+                <label for="nivel">Nivel de experiencia</label>
+                <select id="nivel" name="nivel" required>
+                  <option value="">Selecciona una opción</option>
+                  <option value="principiante">Principiante (sin experiencia)</option>
+                  <option value="intermedio">Intermedio (conocimientos básicos)</option>
+                  <option value="avanzado">Avanzado (experiencia previa)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="mensaje">Mensaje adicional</label>
+                <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+              </div>
+              <button type="submit" class="btn">Enviar inscripción</button>
+            </form>
+          </div>
+        </div>
+      </section>
+  
+      <section id="contacto">
+        <div class="container">
+          <h2 class="section-title">Contacto</h2>
+          <div class="contact-content">
+            <div class="contact-info">
+              <div class="contact-item">
+                <h3>Dirección</h3>
+                <p>Calle 23 #4-27, Santa Marta, Colombia</p>
+              </div>
+              <div class="contact-item">
+                <h3>Teléfono</h3>
+                <p>+57 300 123 4567</p>
+              </div>
+              <div class="contact-item">
+                <h3>Email</h3>
+                <p>info@rollerspeed.com</p>
+              </div>
+              <div class="contact-item">
+                <h3>Horario de atención</h3>
+                <p>Lunes a Viernes: 8:00 AM - 6:00 PM<br>Sábados: 8:00 AM - 1:00 PM</p>
+              </div>
+              <div class="social-media">
+                <a href="#" class="social-icon">Facebook</a>
+                <a href="#" class="social-icon">Instagram</a>
+                <a href="#" class="social-icon">WhatsApp</a>
+              </div>
+            </div>
+            <div class="contact-map">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62860.637261312105!2d-74.24949259777509!3d11.240978695064073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef4f65a7d5b842f%3A0x7a174b0ae570a73a!2sSanta%20Marta%2C%20Magdalena!5e0!3m2!1ses!2sco!4v1695840291243!5m2!1ses!2sco" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </section> -->
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

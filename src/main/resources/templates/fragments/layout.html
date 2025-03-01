@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <!-- Head Fragment -->
+  <head th:fragment="head(title)">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title} + ' - Roller Speed'">Roller Speed</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+
+  <body>
+    <header th:fragment="navbar(activeTab)">
+      <div class="container">
+        <div class="logo">
+          <h1>Roller Speed</h1>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+              <a
+                href="/"
+                th:classappend="${activeTab == 'inicio'} ? 'active'"
+                th:aria-current="${activeTab == 'inicio'} ? 'page'"
+                >Inicio</a
+              >
+            </li>
+            <li>
+              <a
+                href="/mision"
+                th:classappend="${activeTab == 'mision'} ? 'active'"
+                th:aria-current="${activeTab == 'mision'} ? 'page'"
+                >Misión</a
+              >
+            </li>
+            <li>
+              <a
+                href="/vision"
+                th:classappend="${activeTab == 'vision'} ? 'active'"
+                th:aria-current="${activeTab == 'vision'} ? 'page'"
+              >
+                Visión</a
+              >
+            </li>
+            <li>
+              <a
+                href="/valores"
+                th:classappend="${activeTab == 'valores'} ? 'active'"
+                th:aria-current="${activeTab == 'valores'} ? 'page'"
+                >Valores
+              </a>
+            </li>
+            <li>
+              <a
+                href="/horarios"
+                th:classappend="${activeTab == 'horarios'} ? 'active'"
+                th:aria-current="${activeTab == 'horarios'} ? 'page'"
+                >Horarios</a
+              >
+            </li>
+            <li>
+              <a
+                href="/eventos"
+                th:classappend="${activeTab == 'eventos'} ? 'active'"
+                th:aria-current="${activeTab == 'eventos'} ? 'page'"
+                >Eventos de la escuela</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Footer Fragment -->
+    <footer th:fragment="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h3>Roller Speed</h3>
+          </div>
+          <div class="footer-links">
+            <ul>
+              <li><a href="/">Inicio</a></li>
+              <li><a href="/mision">Misión</a></li>
+              <li><a href="/vision">Visión</a></li>
+              <li><a href="/valores">Valores</a></li>
+              <li><a href="/horarios">Horarios</a></li>
+              <li><a href="/eventos">Eventos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
