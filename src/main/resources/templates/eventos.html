@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Eventos')}"> </head>
+  <body>
+    <header th:replace="~{fragments/layout :: navbar('eventos')}"></header>
+
+    <section class="events-hero">
+      <div class="events-hero-content">
+        <h1>Eventos de la Escuela</h1>
+        <p class="events-hero-subtitle">
+          Mantente al día con nuestras actividades y competencias
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="events-section">
+        <h2 class="section-title">Próximos Eventos</h2>
+
+        <div class="events-list">
+          <div class="event-card">
+            <div class="event-date">
+              <span class="day">15</span>
+              <span class="month">Mar</span>
+            </div>
+            <div class="event-details">
+              <h3>Exhibición de Patinaje</h3>
+              <p class="event-location">Parque de los Novios, Santa Marta</p>
+              <p>
+                Nuestros patinadores mostrarán sus habilidades en una exhibición
+                abierta al público. Ven y descubre el talento de nuestra escuela
+                en una tarde llena de emocionantes demostraciones.
+              </p>
+              <a href="#" class="event-button">Más información</a>
+            </div>
+          </div>
+
+          <div class="event-card">
+            <div class="event-date">
+              <span class="day">20</span>
+              <span class="month">Mar</span>
+            </div>
+            <div class="event-details">
+              <h3>Competencia Regional</h3>
+              <p class="event-location">Polideportivo Municipal</p>
+              <p>
+                Participación en la competencia regional de patinaje de
+                velocidad. Nuestros atletas competirán contra los mejores
+                talentos de la región.
+              </p>
+              <a href="#" class="event-button">Más información</a>
+            </div>
+          </div>
+
+          <div class="event-card">
+            <div class="event-date">
+              <span class="day">5</span>
+              <span class="month">Abr</span>
+            </div>
+            <div class="event-details">
+              <h3>Festival de Semana Santa</h3>
+              <p class="event-location">Pista de Patinaje Roller Speed</p>
+              <p>
+                Celebración de Semana Santa con demostraciones, juegos y premios
+                para todos los alumnos. Una gran fiesta para cerrar el año con
+                nuestra comunidad.
+              </p>
+              <a href="#" class="event-button">Más información</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

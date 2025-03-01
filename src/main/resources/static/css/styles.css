@@ -363,6 +363,108 @@ nav ul li a:hover {
   line-height: 1.6;
 }
 
+/* Events */
+
+.events-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/images/events.jpg") center/cover;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-top: 80px;
+  margin-bottom: 3rem;
+}
+
+.events-hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.events-hero-subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.events-section {
+  padding: 4rem 0;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 4rem;
+}
+
+.event-card {
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-date {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+}
+
+.event-date .day {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.event-date .month {
+  font-size: 1.2rem;
+}
+
+.event-details {
+  padding: 20px;
+  flex: 1;
+}
+
+.event-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.event-location {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.event-button {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--primary-color);
+  color: var(--light-color);
+  border-radius: 5px;
+  margin-top: 15px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.event-button:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
 /* Footer */
 footer {
   background: var(--dark-color);
@@ -524,6 +626,38 @@ footer {
   .vision-text {
     font-size: 1.2rem;
     text-align: center;
+  }
+
+  /* Events */
+
+  .events-hero {
+    height: var(--height-hero);
+  }
+
+  .events-hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .events-hero-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .event-card {
+    flex-direction: column;
+  }
+
+  .event-date {
+    padding: 15px;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .event-date .day {
+    font-size: 1.5rem;
+  }
+
+  .event-date .month {
+    font-size: 1rem;
   }
   /* Footer */
 
