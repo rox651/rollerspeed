@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Valores')}"> </head>
+  <body>
+    <header th:replace="~{fragments/layout :: navbar('valores')}"></header>
+
+    <section class="values-hero">
+      <div class="values-hero-content">
+        <h1>Nuestros Valores</h1>
+        <p class="values-hero-subtitle">
+          Los pilares que guían nuestra formación deportiva
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="values-section">
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">
+              <svg
+                class="trophy-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 21H16M12 21V17M12 17C9.23858 17 7 14.7614 7 12V4H17V12C17 14.7614 14.7614 17 12 17ZM17 6H19C20.1046 6 21 6.89543 21 8V9C21 10.1046 20.1046 11 19 11H17M7 6H5C3.89543 6 3 6.89543 3 8V9C3 10.1046 3.89543 11 5 11H7"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h2>Disciplina</h2>
+            <p class="value-description">
+              La base fundamental para el progreso en el patinaje. Enseñamos a
+              nuestros alumnos que la constancia y el orden son esenciales para
+              alcanzar cualquier meta.
+            </p>
+            <blockquote class="value-quote">
+              <p>"La disciplina es el puente entre metas y logros."</p>
+              <cite>— Jim Rohn</cite>
+            </blockquote>
+            <div class="value-applications">
+              <h3>Cómo lo aplicamos:</h3>
+              <ul>
+                <li>Horarios estructurados de entrenamiento</li>
+                <li>Rutinas progresivas de aprendizaje</li>
+                <li>Seguimiento personalizado del progreso</li>
+                <li>Reconocimiento de la asistencia constante</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">
+              <svg
+                class="rocket-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 15L9 12M12 15L15 12M12 15V3M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h2>Perseverancia</h2>
+            <p class="value-description">
+              Actitud constante para superar obstáculos. Fomentamos la capacidad
+              de levantarse después de cada caída, literal y figurativamente.
+            </p>
+            <blockquote class="value-quote">
+              <p>
+                "La perseverancia no es una carrera larga; son muchas carreras
+                cortas, una tras otra."
+              </p>
+              <cite>— Walter Elliot</cite>
+            </blockquote>
+            <div class="value-applications">
+              <h3>Cómo lo aplicamos:</h3>
+              <ul>
+                <li>Celebración del esfuerzo, no solo del resultado</li>
+                <li>Historias inspiradoras de superación</li>
+                <li>Técnicas para manejar la frustración</li>
+                <li>Establecimiento de metas progresivas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">
+              <svg
+                class="team-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 20H7M12 20V16M12 16C9.23858 16 7 13.7614 7 11V7H17V11C17 13.7614 14.7614 16 12 16ZM17 9H19C20.1046 9 21 9.89543 21 11V12C21 13.1046 20.1046 14 19 14H17M7 9H5C3.89543 9 3 9.89543 3 11V12C3 13.1046 3.89543 14 5 14H7"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h2>Trabajo en equipo</h2>
+            <p class="value-description">
+              Colaboración para alcanzar metas comunes. Aunque el patinaje puede
+              ser individual, creemos en el poder del apoyo mutuo y la
+              comunidad.
+            </p>
+            <blockquote class="value-quote">
+              <p>
+                "El talento gana partidos, pero el trabajo en equipo gana
+                campeonatos."
+              </p>
+              <cite>— Michael Jordan</cite>
+            </blockquote>
+            <div class="value-applications">
+              <h3>Cómo lo aplicamos:</h3>
+              <ul>
+                <li>Actividades grupales y coreografías</li>
+                <li>Mentorías entre patinadores avanzados y principiantes</li>
+                <li>Proyectos colaborativos para exhibiciones</li>
+                <li>Celebraciones de logros colectivos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

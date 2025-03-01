@@ -465,6 +465,120 @@ nav ul li a:hover {
   color: white;
 }
 
+/* Valores */
+
+.values-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/images/values.jpg") center/cover;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-top: 80px;
+  margin-bottom: 2rem;
+}
+
+.values-hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.values-hero-subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.value-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+}
+
+.value-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+}
+
+.value-icon svg {
+  width: 40px;
+  height: 40px;
+  color: var(--primary-color);
+}
+
+.value-card h2 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.value-description {
+  color: var(--dark-color);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.value-quote {
+  background: var(--light-color);
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.value-quote p {
+  font-style: italic;
+  color: var(--dark-color);
+  margin-bottom: 0.5rem;
+}
+
+.value-quote cite {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.value-applications {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+.value-applications h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.value-applications ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.value-applications li {
+  color: var(--dark-color);
+  margin-bottom: 0.5rem;
+}
+
 /* Footer */
 footer {
   background: var(--dark-color);
@@ -658,6 +772,36 @@ footer {
 
   .event-date .month {
     font-size: 1rem;
+  }
+
+  /* Valores */
+  .values-section {
+    padding: 1rem 0;
+  }
+  .values-hero {
+    height: var(--height-hero);
+    margin-bottom: 0;
+  }
+
+  .values-hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .values-hero-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .value-card {
+    padding: 1rem;
+  }
+
+  .value-applications {
+    padding: 1rem;
   }
   /* Footer */
 
