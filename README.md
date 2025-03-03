@@ -48,13 +48,13 @@ El objetivo principal de este proyecto fue crear una aplicación web utilizando 
 2. **Compilar el Proyecto**
 
    ```bash
-   ./mvn clean install
+   ./mvnw clean install
    ```
 
 3. **Ejecutar la Aplicación**
 
    ```bash
-   ./mvn spring-boot:run
+   ./mvnw spring-boot:run
    ```
 
 4. **Acceder a la Aplicación**
