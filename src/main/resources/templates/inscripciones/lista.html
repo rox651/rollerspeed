@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Inscripciones')}">
+    <title>Inscripciones</title>
+  </head>
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/listas.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='inscripciones')}"
+    ></header>
+
+    <main class="lista-container" style="margin-top: var(--header-height)">
+      <div class="header-actions">
+        <h2 class="section-title">Gestión de Inscripciones</h2>
+        <a href="/inscripciones/nuevo" class="btn-nuevo">
+          <i class="fas fa-plus"></i> Nueva Inscripción
+        </a>
+      </div>
+
+      <div th:if="${mensaje}" class="mensaje-exito animate-fade-in">
+        <span th:text="${mensaje}"></span>
+        <button
+          class="btn-cerrar"
+          onclick="this.parentElement.style.display='none'"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="tabla-contenedor animate-fade-in">
+        <table class="tabla-registros">
+          <thead>
+            <tr>
+              <th>Estudiante</th>
+              <th>Clase</th>
+              <th>Fecha Inscripción</th>
+              <th>Fecha Finalización</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="inscripcion : ${inscripciones}">
+              <td th:text="${inscripcion.estudiante.nombre}"></td>
+              <td th:text="${inscripcion.clase.nombre}"></td>
+              <td
+                th:text="${#temporals.format(inscripcion.fechaInscripcion, 'dd/MM/yyyy')}"
+              ></td>
+              <td
+                th:text="${inscripcion.fechaFinalizacion != null ? #temporals.format(inscripcion.fechaFinalizacion, 'dd/MM/yyyy') : '-'}"
+              ></td>
+              <td>
+                <span
+                  th:class="'estado-' + ${#strings.toLowerCase(inscripcion.estado)}"
+                  th:text="${inscripcion.estado}"
+                >
+                </span>
+              </td>
+              <td>
+                <div class="acciones">
+                  <a
+                    th:href="@{/inscripciones/editar/{id}(id=${inscripcion.id})}"
+                    class="btn-editar"
+                  >
+                    <i class="fas fa-edit"></i> Editar
+                  </a>
+                  <form
+                    th:if="${inscripcion.estado != 'CANCELADO'}"
+                    th:action="@{/inscripciones/cancelar/{id}(id=${inscripcion.id})}"
+                    method="POST"
+                    class="form-inline"
+                  >
+                    <button
+                      type="submit"
+                      class="btn-eliminar"
+                      onclick="return confirm('¿Estás seguro de cancelar esta inscripción?')"
+                    >
+                      <i class="fas fa-times-circle"></i> Cancelar
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(inscripciones)}">
+              <td colspan="6" class="sin-datos">
+                <i class="fas fa-clipboard-list"></i>
+                <p>No hay inscripciones registradas</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

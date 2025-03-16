@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Editar Inscripción')}"> </head>
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/formulario.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='inscripciones')}"
+    ></header>
+
+    <main class="formulario-container">
+      <div class="formulario-card">
+        <h2
+          th:text="${inscripcion.id != null ? 'Editar Inscripción' : 'Nueva Inscripción'}"
+        >
+          Inscripción
+        </h2>
+
+        <form
+          th:action="@{${inscripcion.id != null ? '/inscripciones/editar/' + inscripcion.id : '/inscripciones/nuevo'}}"
+          th:object="${inscripcion}"
+          method="POST"
+          class="formulario"
+        >
+          <input
+            type="hidden"
+            th:field="*{id}"
+            th:if="${inscripcion.id != null}"
+          />
+
+          <div class="campo-formulario">
+            <label for="clase">Clase</label>
+            <select
+              id="clase"
+              th:field="*{clase}"
+              th:class="${#fields.hasErrors('clase')} ? 'input-error' : ''"
+              required
+            >
+              <option value="">Seleccione una clase</option>
+              <option
+                th:each="claseOpt : ${clases}"
+                th:value="${claseOpt.id}"
+                th:text="${#strings.capitalize(#strings.toLowerCase(claseOpt.nombre))}"
+              ></option>
+            </select>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('clase')}"
+              th:errors="*{clase}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="estudiante">Estudiante</label>
+            <select
+              id="estudiante"
+              th:field="*{estudiante}"
+              th:class="${#fields.hasErrors('estudiante')} ? 'input-error' : ''"
+              required
+            >
+              <option value="">Seleccione un estudiante</option>
+              <option
+                th:each="estudianteOpt : ${estudiantes}"
+                th:value="${estudianteOpt.id}"
+                th:text="${estudianteOpt.nombre}"
+              ></option>
+            </select>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('estudiante')}"
+              th:errors="*{estudiante}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="fechaInscripcion">Fecha de Inscripción</label>
+            <input
+              type="date"
+              id="fechaInscripcion"
+              th:field="*{fechaInscripcion}"
+              th:class="${#fields.hasErrors('fechaInscripcion')} ? 'input-error' : ''"
+              required
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('fechaInscripcion')}"
+              th:errors="*{fechaInscripcion}"
+            >
+            </span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="estado">Estado</label>
+            <select
+              id="estado"
+              th:field="*{estado}"
+              th:class="${#fields.hasErrors('estado')} ? 'input-error' : ''"
+              required
+            >
+              <option
+                th:each="estadoOpt : ${estados}"
+                th:value="${estadoOpt}"
+                th:text="${#strings.capitalize(#strings.toLowerCase(estadoOpt.name()))} "
+              ></option>
+            </select>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('estado')}"
+              th:errors="*{estado}"
+            ></span>
+          </div>
+
+          <div class="botones-formulario">
+            <button type="submit" class="btn-guardar">
+              <span
+                th:text="${inscripcion.id != null ? 'Guardar Cambios' : 'Crear Inscripción'}"
+              >
+                Guardar
+              </span>
+            </button>
+            <a href="/inscripciones" class="btn-cancelar">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Horarios')}">
+    <title>Horarios</title>
+  </head>
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/listas.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='horarios')}"
+    ></header>
+
+    <main class="lista-container" style="margin-top: var(--header-height)">
+      <div class="header-actions">
+        <h2 class="section-title">Horarios de Clases</h2>
+      </div>
+
+      <div th:if="${mensaje}" class="mensaje-exito animate-fade-in">
+        <span th:text="${mensaje}"></span>
+        <button
+          class="btn-cerrar"
+          onclick="this.parentElement.style.display='none'"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="tabla-contenedor animate-fade-in">
+        <table class="tabla-registros">
+          <thead>
+            <tr>
+              <th>Clase</th>
+              <th>Instructor</th>
+              <th>Fecha</th>
+              <th>Horario</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="horario : ${horarios}">
+              <td th:text="${horario.clase.nombre}"></td>
+              <td th:text="${horario.clase.instructor.nombre}"></td>
+              <td
+                th:text="${#temporals.format(horario.fecha, 'dd/MM/yyyy')}"
+              ></td>
+              <td
+                th:text="${#temporals.format(horario.horaInicio, 'HH:mm')} + ' - ' + ${#temporals.format(horario.horaFin, 'HH:mm')}"
+              ></td>
+              <td>
+                <span
+                  th:class="${'estado-' + #strings.toLowerCase(horario.estado)}"
+                  th:text="${horario.estado.descripcion}"
+                >
+                </span>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(horarios)}">
+              <td colspan="5" class="sin-datos">
+                <i class="fas fa-calendar-times"></i>
+                <p>No hay horarios programados</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

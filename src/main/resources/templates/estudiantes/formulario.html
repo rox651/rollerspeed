@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head
+    th:replace="~{fragments/layout :: head(${estudiante.id} ? 'Editar Estudiante' : 'Nuevo Estudiante')}"
+  >
+  </head>
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/formulario.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='estudiantes')}"
+    ></header>
+
+    <main class="formulario-container">
+      <div class="formulario-card">
+        <h2
+          th:text="${estudiante.id} ? 'Editar Estudiante' : 'Nuevo Estudiante'"
+        ></h2>
+
+        <form
+          th:action="${estudiante.id} ? @{/estudiantes/editar/{id}(id=${estudiante.id})} : @{/estudiantes/nuevo}"
+          th:object="${estudiante}"
+          method="POST"
+          class="formulario"
+        >
+          <div class="campo-formulario">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              th:field="*{nombre}"
+              th:class="${#fields.hasErrors('nombre')} ? 'input-error' : ''"
+              required
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('nombre')}"
+              th:errors="*{nombre}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              th:field="*{email}"
+              th:class="${#fields.hasErrors('email')} ? 'input-error' : ''"
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('email')}"
+              th:errors="*{email}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="telefono">Teléfono</label>
+            <input
+              type="tel"
+              id="telefono"
+              th:field="*{telefono}"
+              th:class="${#fields.hasErrors('telefono')} ? 'input-error' : ''"
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('telefono')}"
+              th:errors="*{telefono}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="edad">Edad</label>
+            <input
+              type="number"
+              id="edad"
+              th:field="*{edad}"
+              th:class="${#fields.hasErrors('edad')} ? 'input-error' : ''"
+              min="5"
+              required
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('edad')}"
+              th:errors="*{edad}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="nivel">Nivel</label>
+            <select
+              id="nivel"
+              th:field="*{nivel}"
+              th:class="${#fields.hasErrors('nivel')} ? 'input-error' : ''"
+              required
+            >
+              <option value="">Seleccione un nivel</option>
+              <option value="PRINCIPIANTE">Principiante</option>
+              <option value="INTERMEDIO">Intermedio</option>
+              <option value="AVANZADO">Avanzado</option>
+            </select>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('nivel')}"
+              th:errors="*{nivel}"
+            ></span>
+          </div>
+
+          <div class="botones-formulario">
+            <button type="submit" class="btn-guardar">Guardar</button>
+            <a href="/estudiantes" class="btn-cancelar">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

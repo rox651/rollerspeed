@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Clases')}">
+    <title>Clases</title>
+  </head>
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/listas.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='clases')}"
+    ></header>
+
+    <main class="lista-container" style="margin-top: var(--header-height)">
+      <div class="header-actions">
+        <div class="header-title">
+          <h2 class="section-title">Gestión de Clases</h2>
+          <div class="filtros">
+            <a
+              th:href="@{/clases}"
+              class="btn-filtro"
+              th:classappend="${!mostrandoDisponibles ? 'activo' : ''}"
+            >
+              Todas las Clases
+            </a>
+            <a
+              th:href="@{/clases(soloDisponibles=true)}"
+              class="btn-filtro"
+              th:classappend="${mostrandoDisponibles ? 'activo' : ''}"
+            >
+              Clases Disponibles
+            </a>
+          </div>
+        </div>
+        <a href="/clases/nuevo" class="btn-nuevo">
+          <i class="fas fa-plus"></i> Nueva Clase
+        </a>
+      </div>
+
+      <div th:if="${mensaje}" class="mensaje-exito animate-fade-in">
+        <span th:text="${mensaje}"></span>
+        <button
+          class="btn-cerrar"
+          onclick="this.parentElement.style.display='none'"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="tabla-contenedor animate-fade-in">
+        <table class="tabla-registros">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Instructor</th>
+              <th>Día</th>
+              <th>Horario</th>
+              <th>Nivel</th>
+              <th>Capacidad</th>
+              <th>Cupos Disponibles</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="clase : ${clases}">
+              <td th:text="${clase.nombre}"></td>
+              <td>
+                <a
+                  th:href="@{/clases/instructor/{id}(id=${clase.instructor.id})}"
+                  th:text="${clase.instructor.nombre}"
+                >
+                </a>
+              </td>
+              <td
+                th:text="${#strings.capitalize(#strings.toLowerCase(clase.diaSemana))}"
+              ></td>
+              <td
+                th:text="${#temporals.format(clase.horaInicio, 'HH:mm')} + ' - ' + ${#temporals.format(clase.horaFin, 'HH:mm')}"
+              ></td>
+              <td th:text="${clase.nivel}"></td>
+              <td th:text="${clase.capacidadMaxima}"></td>
+              <td>
+                <span
+                  th:text="${clase.capacidadMaxima - #lists.size(clase.inscripciones)}"
+                  th:class="${clase.capacidadMaxima - #lists.size(clase.inscripciones) > 0 ? 'cupos-disponibles' : 'cupos-llenos'}"
+                >
+                </span>
+              </td>
+              <td>
+                <span
+                  th:class="${clase.activo ? 'estado-activo' : 'estado-inactivo'}"
+                  th:text="${clase.activo ? 'Activa' : 'Inactiva'}"
+                >
+                </span>
+              </td>
+              <td>
+                <div class="acciones">
+                  <a
+                    th:href="@{/clases/editar/{id}(id=${clase.id})}"
+                    class="btn-editar"
+                  >
+                    <i class="fas fa-edit"></i> Editar
+                  </a>
+                  <form
+                    th:action="@{/clases/desactivar/{id}(id=${clase.id})}"
+                    method="POST"
+                    class="form-inline"
+                  >
+                    <button
+                      type="submit"
+                      class="btn-eliminar"
+                      onclick="return confirm('¿Estás seguro de desactivar esta clase?')"
+                    >
+                      <i class="fas fa-times-circle"></i> Desactivar
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(clases)}">
+              <td colspan="9" class="sin-datos">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p
+                  th:text="${mostrandoDisponibles ? 'No hay clases disponibles' : 'No hay clases registradas'}"
+                ></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

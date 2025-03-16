@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Estudiantes')}">
+    <title>Estudiantes</title>
+  </head>
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/listas.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='estudiantes')}"
+    ></header>
+
+    <main class="lista-container" style="margin-top: var(--header-height)">
+      <div class="header-actions">
+        <h2 class="section-title">Gestión de Estudiantes</h2>
+        <a href="/estudiantes/nuevo" class="btn-nuevo">
+          <i class="fas fa-plus"></i> Nuevo Estudiante
+        </a>
+      </div>
+
+      <div th:if="${mensaje}" class="mensaje-exito animate-fade-in">
+        <span th:text="${mensaje}"></span>
+        <button
+          class="btn-cerrar"
+          onclick="this.parentElement.style.display='none'"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="tabla-contenedor animate-fade-in">
+        <table class="tabla-registros">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Edad</th>
+              <th>Nivel</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="estudiante : ${estudiantes}">
+              <td th:text="${estudiante.nombre}"></td>
+              <td th:text="${estudiante.email}"></td>
+              <td th:text="${estudiante.telefono}"></td>
+              <td th:text="${estudiante.edad}"></td>
+              <td th:text="${estudiante.nivel}"></td>
+              <td>
+                <span
+                  th:class="${estudiante.activo ? 'estado-activo' : 'estado-inactivo'}"
+                  th:text="${estudiante.activo ? 'Activo' : 'Inactivo'}"
+                >
+                </span>
+              </td>
+              <td>
+                <div class="acciones">
+                  <a
+                    th:href="@{/estudiantes/editar/{id}(id=${estudiante.id})}"
+                    class="btn-editar"
+                  >
+                    <i class="fas fa-edit"></i> Editar
+                  </a>
+                  <form
+                    th:action="@{/estudiantes/desactivar/{id}(id=${estudiante.id})}"
+                    method="POST"
+                    class="form-inline"
+                  >
+                    <button
+                      type="submit"
+                      class="btn-eliminar"
+                      onclick="return confirm('¿Estás seguro de desactivar este estudiante?')"
+                    >
+                      <i class="fas fa-user-slash"></i> Desactivar
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(estudiantes)}">
+              <td colspan="7" class="sin-datos">
+                <i class="fas fa-user-graduate"></i>
+                <p>No hay estudiantes registrados</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>

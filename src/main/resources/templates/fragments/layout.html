@@ -16,7 +16,7 @@
         </div>
 
         <nav>
-          <ul>
+          <ul class="nav-main">
             <li>
               <a
                 href="/"
@@ -63,7 +63,51 @@
                 href="/eventos"
                 th:classappend="${activeTab == 'eventos'} ? 'active'"
                 th:aria-current="${activeTab == 'eventos'} ? 'page'"
-                >Eventos de la escuela</a
+                >Eventos</a
+              >
+            </li>
+          </ul>
+
+          <!-- Nueva sección de gestión -->
+          <ul class="nav-management">
+            <li>
+              <a
+                href="/clases"
+                th:classappend="${activeTab == 'clases'} ? 'active'"
+                th:aria-current="${activeTab == 'clases'} ? 'page'"
+                >Clases</a
+              >
+            </li>
+            <li>
+              <a
+                href="/estudiantes"
+                th:classappend="${activeTab == 'estudiantes'} ? 'active'"
+                th:aria-current="${activeTab == 'estudiantes'} ? 'page'"
+                >Estudiantes</a
+              >
+            </li>
+            <li>
+              <a
+                href="/inscripciones"
+                th:classappend="${activeTab == 'inscripciones'} ? 'active'"
+                th:aria-current="${activeTab == 'inscripciones'} ? 'page'"
+                >Inscripciones</a
+              >
+            </li>
+            <li>
+              <a
+                href="/horarios"
+                th:classappend="${activeTab == 'horarios'} ? 'active'"
+                th:aria-current="${activeTab == 'horarios'} ? 'page'"
+                >Horarios</a
+              >
+            </li>
+            <li>
+              <a
+                href="/instructores"
+                th:classappend="${activeTab == 'instructores'} ? 'active'"
+                th:aria-current="${activeTab == 'instructores'} ? 'page'"
+                >Instructores</a
               >
             </li>
           </ul>
@@ -79,13 +123,20 @@
             <h3>Roller Speed</h3>
           </div>
           <div class="footer-links">
-            <ul>
+            <ul class="footer-main">
               <li><a href="/">Inicio</a></li>
               <li><a href="/mision">Misión</a></li>
               <li><a href="/vision">Visión</a></li>
               <li><a href="/valores">Valores</a></li>
-              <li><a href="/horarios">Horarios</a></li>
+              <li><a href="/servicios">Servicios</a></li>
               <li><a href="/eventos">Eventos</a></li>
+            </ul>
+            <ul class="footer-management">
+              <li><a href="/clases">Clases</a></li>
+              <li><a href="/estudiantes">Estudiantes</a></li>
+              <li><a href="/inscripciones">Inscripciones</a></li>
+              <li><a href="/horarios">Horarios</a></li>
+              <li><a href="/instructores">Instructores</a></li>
             </ul>
           </div>
         </div>

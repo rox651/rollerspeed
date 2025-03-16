@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/layout :: head('Instructores')}">
+    <title>Instructores</title>
+  </head>
+  <!-- Agregamos los estilos después del head para que no sean reemplazados -->
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/listas.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='instructores')}"
+    ></header>
+
+    <main class="lista-container" style="margin-top: var(--header-height)">
+      <div class="header-actions">
+        <h2 class="section-title">Gestión de Instructores</h2>
+        <a href="/instructores/nuevo" class="btn-nuevo">
+          <i class="fas fa-plus"></i> Nuevo Instructor
+        </a>
+      </div>
+
+      <!-- Mensaje de éxito con animación -->
+      <div th:if="${mensaje}" class="mensaje-exito animate-fade-in">
+        <span th:text="${mensaje}"></span>
+        <button
+          class="btn-cerrar"
+          onclick="this.parentElement.style.display='none'"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Tabla con diseño mejorado -->
+      <div class="tabla-contenedor animate-fade-in">
+        <table class="tabla-registros">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Edad</th>
+              <th>Especialidad</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="instructor : ${instructores}" class="instructor-row">
+              <td class="td-nombre" th:text="${instructor.nombre}"></td>
+              <td class="td-email" th:text="${instructor.email}"></td>
+              <td class="td-telefono" th:text="${instructor.telefono}"></td>
+              <td class="td-edad" th:text="${instructor.edad}"></td>
+              <td
+                class="td-especialidad"
+                th:text="${instructor.especialidad}"
+              ></td>
+              <td class="td-estado">
+                <span
+                  th:class="${instructor.activo ? 'estado-activo' : 'estado-inactivo'}"
+                  th:text="${instructor.activo ? 'Activo' : 'Inactivo'}"
+                >
+                </span>
+              </td>
+              <td class="td-acciones">
+                <div class="acciones">
+                  <a
+                    th:href="@{/instructores/editar/{id}(id=${instructor.id})}"
+                    class="btn-editar"
+                  >
+                    <i class="fas fa-edit"></i> Editar
+                  </a>
+                  <form
+                    th:action="@{/instructores/desactivar/{id}(id=${instructor.id})}"
+                    method="POST"
+                    class="form-inline"
+                  >
+                    <button
+                      type="submit"
+                      class="btn-eliminar"
+                      onclick="return confirm('¿Estás seguro de desactivar este instructor?')"
+                    >
+                      <i class="fas fa-user-slash"></i> Desactivar
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(instructores)}">
+              <td colspan="7" class="sin-datos">
+                <i class="fas fa-user-slash"></i>
+                <p>No hay instructores registrados</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+
+    <!-- Agregar Font Awesome para los iconos -->
+    <script
+      src="https://kit.fontawesome.com/tu-codigo-de-kit.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -137,9 +137,38 @@ header .container {
   margin-bottom: var(--space-xs);
 }
 
+/* Navigation */
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
 nav ul {
   display: flex;
   gap: var(--space-sm);
+  align-items: center;
+}
+
+nav ul.nav-main {
+  margin-bottom: var(--space-xs);
+}
+
+nav ul.nav-management {
+  background-color: var(--light-color);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--space-xs);
+}
+
+nav ul.nav-management li a {
+  color: var(--secondary-color);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+nav ul.nav-management li a:hover,
+nav ul.nav-management li a.active {
+  color: var(--primary-color);
 }
 
 nav ul li a {
@@ -147,7 +176,8 @@ nav ul li a {
   transition: all 0.3s ease;
 }
 
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a.active {
   color: var(--primary-color);
 }
 
@@ -754,22 +784,24 @@ footer {
   font-weight: 900;
 }
 
+/* Footer Links */
+.footer-links {
+  display: flex;
+  gap: var(--space-xl);
+}
+
 .footer-links ul {
   display: flex;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
-.footer-links ul li {
-  margin-bottom: var(--space-xs);
+.footer-links ul.footer-main {
+  margin-right: var(--space-lg);
 }
 
-.footer-links ul li a {
-  color: #ddd;
-  transition: all 0.3s ease;
-}
-
-.footer-links ul li a:hover {
-  color: var(--primary-color);
+.footer-links ul.footer-management {
+  padding-left: var(--space-lg);
+  border-left: 1px solid var(--tertiary-color);
 }
 
 .footer-bottom {
@@ -830,15 +862,34 @@ footer {
     text-align: center;
   }
 
-  nav ul {
-    margin-top: var(--space-sm);
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-xs);
+  nav {
+    width: 100%;
   }
 
-  nav ul li {
-    margin: var(--space-xs);
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav ul.nav-management {
+    padding: var(--space-xs);
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .footer-links ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-links ul.footer-management {
+    padding-left: 0;
+    border-left: none;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--tertiary-color);
   }
 
   /* Hero */

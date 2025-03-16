@@ -1,0 +1,192 @@
+/* Estilos para el contenedor del formulario */
+.formulario-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh + var(--header-height));
+  padding: 2rem;
+  background-color: #f5f5f5;
+}
+
+/* Estilos para la tarjeta del formulario */
+.formulario-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
+}
+
+.formulario-card h2 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Estilos para el formulario */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Estilos para los campos del formulario */
+.campo-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.campo-formulario label {
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.campo-formulario input,
+.campo-formulario select {
+  padding: 0.75rem;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.campo-formulario input:focus,
+.campo-formulario select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+/* Estilos específicos para el campo de edad */
+.campo-formulario input[type="number"] {
+  width: 120px;
+}
+
+/* Eliminar flechas del input number en diferentes navegadores */
+.campo-formulario input[type="number"]::-webkit-inner-spin-button,
+.campo-formulario input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.campo-formulario input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Estilos para mensajes de error */
+.error-mensaje {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.input-error {
+  border-color: #e74c3c !important;
+  background-color: #fff5f5;
+}
+
+/* Estilos para los botones */
+.botones-formulario {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-guardar,
+.btn-cancelar {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.btn-guardar {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+}
+
+.btn-guardar:hover {
+  background-color: #27ae60;
+  transform: translateY(-1px);
+}
+
+.btn-cancelar {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.btn-cancelar:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.formulario-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .formulario-card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .botones-formulario {
+    flex-direction: column;
+  }
+
+  .btn-guardar,
+  .btn-cancelar {
+    width: 100%;
+  }
+}
+
+/* Estilos para el select de género */
+.campo-formulario select {
+  background-color: white;
+  cursor: pointer;
+}
+
+.campo-formulario select:hover {
+  border-color: #3498db;
+}
+
+/* Estilos para campos requeridos */
+.campo-formulario label::after {
+  content: "*";
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+/* Estilos para el hover de los inputs */
+.campo-formulario input:hover,
+.campo-formulario select:hover {
+  border-color: #95a5a6;
+}

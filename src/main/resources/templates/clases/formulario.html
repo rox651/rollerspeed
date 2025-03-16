@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head
+    th:replace="~{fragments/layout :: head(${clase.id} ? 'Editar Clase' : 'Nueva Clase')}"
+  >
+  </head>
+  <th:block>
+    <link rel="stylesheet" th:href="@{/css/formulario.css}" />
+  </th:block>
+  <body>
+    <header
+      th:replace="~{fragments/layout :: navbar(activeTab='clases')}"
+    ></header>
+
+    <main class="formulario-container">
+      <div class="formulario-card">
+        <h2 th:text="${clase.id} ? 'Editar Clase' : 'Nueva Clase'"></h2>
+
+        <form
+          th:action="${clase.id} ? @{/clases/editar/{id}(id=${clase.id})} : @{/clases/nuevo}"
+          th:object="${clase}"
+          method="POST"
+          class="formulario"
+        >
+          <div class="campo-formulario">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              th:field="*{nombre}"
+              th:class="${#fields.hasErrors('nombre')} ? 'input-error' : ''"
+              required
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('nombre')}"
+              th:errors="*{nombre}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="descripcion">Descripción</label>
+            <textarea
+              id="descripcion"
+              th:field="*{descripcion}"
+              th:class="${#fields.hasErrors('descripcion')} ? 'input-error' : ''"
+              rows="3"
+            ></textarea>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('descripcion')}"
+              th:errors="*{descripcion}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="instructor">Instructor</label>
+            <select
+              id="instructor"
+              th:field="*{instructor}"
+              th:class="${#fields.hasErrors('instructor')} ? 'input-error' : ''"
+              required
+            >
+              <option value="">Seleccione un instructor</option>
+              <option
+                th:each="inst : ${instructores}"
+                th:value="${inst.id}"
+                th:text="${inst.nombre}"
+              ></option>
+            </select>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('instructor')}"
+              th:errors="*{instructor}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="diaSemana">Día de la Semana</label>
+            <select
+              id="diaSemana"
+              th:field="*{diaSemana}"
+              th:class="${#fields.hasErrors('diaSemana')} ? 'input-error' : ''"
+              required
+            >
+              <option value="">Seleccione un día</option>
+              <option
+                th:each="dia : ${diasSemana}"
+                th:value="${dia}"
+                th:text="${#strings.capitalize(#strings.toLowerCase(dia))}"
+              ></option>
+            </select>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('diaSemana')}"
+              th:errors="*{diaSemana}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="horaInicio">Hora de Inicio</label>
+            <input
+              type="time"
+              id="horaInicio"
+              th:field="*{horaInicio}"
+              th:class="${#fields.hasErrors('horaInicio')} ? 'input-error' : ''"
+              required
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('horaInicio')}"
+              th:errors="*{horaInicio}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="horaFin">Hora de Fin</label>
+            <input
+              type="time"
+              id="horaFin"
+              th:field="*{horaFin}"
+              th:class="${#fields.hasErrors('horaFin')} ? 'input-error' : ''"
+              required
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('horaFin')}"
+              th:errors="*{horaFin}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="nivel">Nivel</label>
+            <select
+              id="nivel"
+              th:field="*{nivel}"
+              th:class="${#fields.hasErrors('nivel')} ? 'input-error' : ''"
+              required
+            >
+              <option value="">Seleccione un nivel</option>
+              <option value="PRINCIPIANTE">Principiante</option>
+              <option value="INTERMEDIO">Intermedio</option>
+              <option value="AVANZADO">Avanzado</option>
+            </select>
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('nivel')}"
+              th:errors="*{nivel}"
+            ></span>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="capacidadMaxima">Capacidad Máxima</label>
+            <input
+              type="number"
+              id="capacidadMaxima"
+              th:field="*{capacidadMaxima}"
+              th:class="${#fields.hasErrors('capacidadMaxima')} ? 'input-error' : ''"
+              min="1"
+              required
+            />
+            <span
+              class="error-mensaje"
+              th:if="${#fields.hasErrors('capacidadMaxima')}"
+              th:errors="*{capacidadMaxima}"
+            ></span>
+          </div>
+
+          <div class="botones-formulario">
+            <button type="submit" class="btn-guardar">Guardar</button>
+            <a href="/clases" class="btn-cancelar">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+  </body>
+</html>
