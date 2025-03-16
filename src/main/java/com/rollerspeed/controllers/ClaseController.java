@@ -1,7 +1,6 @@
 package com.rollerspeed.controllers;
 
 import com.rollerspeed.models.Clase;
-import com.rollerspeed.models.Inscripcion;
 import com.rollerspeed.services.ClaseService;
 import com.rollerspeed.services.InscripcionService;
 import com.rollerspeed.services.InstructorService;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.DayOfWeek;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -24,14 +22,12 @@ public class ClaseController {
 
     private final ClaseService claseService;
     private final InstructorService instructorService;
-    private final InscripcionService inscripcionService;
 
     @Autowired
     public ClaseController(ClaseService claseService, InstructorService instructorService,
             InscripcionService inscripcionService) {
         this.claseService = claseService;
         this.instructorService = instructorService;
-        this.inscripcionService = inscripcionService;
     }
 
     @GetMapping

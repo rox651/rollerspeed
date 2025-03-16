@@ -88,9 +88,6 @@ public class EstudianteService {
 
         estudianteExistente.setGenero(estudianteActualizado.getGenero());
         estudianteExistente.setNivel(estudianteActualizado.getNivel());
-        estudianteExistente.setObservaciones(estudianteActualizado.getObservaciones());
-        estudianteExistente.setResponsable(estudianteActualizado.getResponsable());
-        estudianteExistente.setContactoEmergencia(estudianteActualizado.getContactoEmergencia());
 
         return estudianteRepository.save(estudianteExistente);
     }

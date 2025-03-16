@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,26 +37,21 @@ public class InscripcionService {
 
     @Transactional
     public Inscripcion inscribirEstudiante(Long estudianteId, Long claseId) {
-        // Verificar que el estudiante existe
         Estudiante estudiante = estudianteRepository.findById(estudianteId)
                 .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
 
-        // Verificar que la clase existe
         Clase clase = claseRepository.findById(claseId)
                 .orElseThrow(() -> new RuntimeException("Clase no encontrada"));
 
-        // Verificar que la clase tiene cupo disponible
         if (!claseService.verificarDisponibilidadClase(claseId)) {
             throw new RuntimeException("La clase no tiene cupos disponibles");
         }
 
-        // Verificar que el estudiante no esté ya inscrito en esta clase
         List<Inscripcion> inscripcionesActivas = inscripcionRepository.findInscripcionActiva(estudianteId, claseId);
         if (!inscripcionesActivas.isEmpty()) {
             throw new RuntimeException("El estudiante ya está inscrito en esta clase");
         }
 
-        // Crear la inscripción
         Inscripcion inscripcion = new Inscripcion();
         inscripcion.setEstudiante(estudiante);
         inscripcion.setClase(clase);
@@ -69,7 +63,6 @@ public class InscripcionService {
 
     @Transactional
     public Inscripcion guardarInscripcion(Inscripcion inscripcion) {
-        // Verificar que la clase tiene cupo disponible si es una nueva inscripción
         if (inscripcion.getId() == null && inscripcion.getClase() != null) {
             if (!claseService.verificarDisponibilidadClase(inscripcion.getClase().getId())) {
                 throw new RuntimeException("La clase no tiene cupos disponibles");
@@ -126,14 +119,11 @@ public class InscripcionService {
     public void cancelarInscripcion(Long id) {
         inscripcionRepository.findById(id)
                 .ifPresent(inscripcion -> {
-                    // Solo cancelamos si la inscripción está activa
                     if (inscripcion.getEstado() == EstadoInscripcion.ACTIVA) {
                         inscripcion.setEstado(EstadoInscripcion.CANCELADA);
                         inscripcion.setFechaFinalizacion(LocalDate.now());
                         inscripcionRepository.save(inscripcion);
 
-                        // El cupo se libera automáticamente ya que la consulta de cupos
-                        // disponibles solo considera inscripciones ACTIVAS
                     }
                 });
     }
@@ -147,16 +137,13 @@ public class InscripcionService {
     public Inscripcion actualizarInscripcion(Long id, Inscripcion inscripcionActualizada) {
         return inscripcionRepository.findById(id)
                 .map(inscripcion -> {
-                    // Actualizar solo el estado
                     inscripcion.setEstado(inscripcionActualizada.getEstado());
 
-                    // Si el estado cambia a FINALIZADA o CANCELADA, actualizar la fecha de
-                    // finalización
                     if (inscripcionActualizada.getEstado() == EstadoInscripcion.FINALIZADA ||
                             inscripcionActualizada.getEstado() == EstadoInscripcion.CANCELADA) {
                         inscripcion.setFechaFinalizacion(LocalDate.now());
                     } else {
-                        inscripcion.setFechaFinalizacion(null); // Si vuelve a ACTIVA, eliminar fecha de finalización
+                        inscripcion.setFechaFinalizacion(null);
                     }
 
                     return inscripcionRepository.save(inscripcion);

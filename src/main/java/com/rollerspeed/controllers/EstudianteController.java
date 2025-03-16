@@ -1,7 +1,6 @@
 package com.rollerspeed.controllers;
 
 import com.rollerspeed.models.Estudiante;
-import com.rollerspeed.models.Inscripcion;
 import com.rollerspeed.models.Usuario;
 import com.rollerspeed.services.EstudianteService;
 import com.rollerspeed.services.InscripcionService;
@@ -13,19 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/estudiantes")
 public class EstudianteController {
 
     private final EstudianteService estudianteService;
-    private final InscripcionService inscripcionService;
 
     @Autowired
     public EstudianteController(EstudianteService estudianteService, InscripcionService inscripcionService) {
         this.estudianteService = estudianteService;
-        this.inscripcionService = inscripcionService;
     }
 
     @GetMapping
