@@ -69,6 +69,19 @@ h2 {
   font-weight: 700;
 }
 
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -793,6 +806,7 @@ footer {
 .footer-links ul {
   display: flex;
   gap: var(--space-sm);
+  align-items: center;
 }
 
 .footer-links ul.footer-main {
@@ -802,6 +816,10 @@ footer {
 .footer-links ul.footer-management {
   padding-left: var(--space-lg);
   border-left: 1px solid var(--tertiary-color);
+}
+
+.footer-links a {
+  color: var(--light-color);
 }
 
 .footer-bottom {

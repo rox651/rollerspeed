@@ -2,10 +2,11 @@
 .formulario-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: calc(100vh + var(--header-height));
+  align-items: flex-start;
+  min-height: 100vh;
   padding: 2rem;
   background-color: #f5f5f5;
+  margin-top: calc(var(--header-height) + 100px);
 }
 
 /* Estilos para la tarjeta del formulario */
@@ -77,6 +78,38 @@
 
 .campo-formulario input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.campo-formulario textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campo-formulario textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.campo-formulario textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.campo-formulario textarea:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 /* Estilos para mensajes de error */
