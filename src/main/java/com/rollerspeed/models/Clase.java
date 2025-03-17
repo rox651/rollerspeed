@@ -41,8 +41,8 @@ public class Clase {
         }
     }
 
-    @NotNull(message = "El día de la semana es obligatorio")
     @Enumerated(EnumType.STRING)
+    @Column(name = "dia_semana", length = 15)
     private DiaSemana diaSemana;
 
     @NotNull(message = "La hora de inicio es obligatoria")

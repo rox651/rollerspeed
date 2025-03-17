@@ -89,17 +89,16 @@ public class InstructorService {
     }
 
     @Transactional
-    public void desactivarInstructor(Long id) {
+    public void eliminarInstructor(Long id) {
         instructorRepository.findById(id)
                 .ifPresent(instructor -> {
-                    List<Clase> clasesInstructor = claseRepository.findByInstructorIdAndActivoTrue(id);
+                    List<Clase> clasesInstructor = claseRepository.findByInstructorId(id);
 
                     for (Clase clase : clasesInstructor) {
-                        claseService.desactivarClase(clase.getId());
+                        claseService.eliminarClase(clase.getId());
                     }
 
-                    instructor.setActivo(false);
-                    instructorRepository.save(instructor);
+                    instructorRepository.delete(instructor);
                 });
     }
 }

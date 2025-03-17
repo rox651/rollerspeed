@@ -110,20 +110,16 @@ public class ClaseService {
     }
 
     @Transactional
-    public void desactivarClase(Long id) {
+    public void eliminarClase(Long id) {
         claseRepository.findById(id)
                 .ifPresent(clase -> {
-                    // Primero cancelamos todas las inscripciones relacionadas
                     List<Inscripcion> inscripciones = inscripcionRepository.findByClaseId(id);
                     inscripcionRepository.deleteAll(inscripciones);
 
-                    // Luego eliminamos todos los horarios relacionados
                     List<Horario> horarios = horarioRepository.findByClaseId(id);
                     horarioRepository.deleteAll(horarios);
 
-                    // Finalmente desactivamos la clase
-                    clase.setActivo(false);
-                    claseRepository.save(clase);
+                    claseRepository.delete(clase);
                 });
     }
 }

@@ -71,16 +71,16 @@
                     <i class="fas fa-edit"></i> Editar
                   </a>
                   <form
-                    th:action="@{/instructores/desactivar/{id}(id=${instructor.id})}"
+                    th:action="@{/instructores/eliminar/{id}(id=${instructor.id})}"
                     method="POST"
                     class="form-inline"
                   >
                     <button
                       type="submit"
                       class="btn-eliminar"
-                      onclick="return confirm('¿Estás seguro de desactivar este instructor?')"
+                      onclick="return confirm('¿Estás seguro de eliminar este instructor?')"
                     >
-                      <i class="fas fa-user-slash"></i> Desactivar
+                      <i class="fas fa-trash"></i> Eliminar
                     </button>
                   </form>
                 </div>

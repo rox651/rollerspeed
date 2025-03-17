@@ -81,11 +81,11 @@ public class InstructorController {
         }
     }
 
-    @PostMapping("/desactivar/{id}")
-    public String desactivarInstructor(@PathVariable Long id,
+    @PostMapping("/eliminar/{id}")
+    public String eliminarInstructor(@PathVariable Long id,
             RedirectAttributes redirectAttributes) {
-        instructorService.desactivarInstructor(id);
-        redirectAttributes.addFlashAttribute("mensaje", "Instructor desactivado exitosamente");
+        instructorService.eliminarInstructor(id);
+        redirectAttributes.addFlashAttribute("mensaje", "Instructor eliminado exitosamente");
         return "redirect:/instructores";
     }
 }

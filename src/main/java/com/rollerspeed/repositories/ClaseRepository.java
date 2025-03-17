@@ -20,4 +20,6 @@ public interface ClaseRepository extends JpaRepository<Clase, Long> {
     void cancelarInscripcionesPorClaseId(Long claseId);
 
     List<Clase> findByInstructorIdAndActivoTrue(Long instructorId);
+
+    List<Clase> findByInstructorId(Long instructorId);
 }

@@ -16,8 +16,12 @@
       <div class="formulario-card">
         <h2 th:text="${clase.id} ? 'Editar Clase' : 'Nueva Clase'"></h2>
 
+        <div th:if="${error}" class="alert alert-danger" role="alert">
+          <span th:text="${error}"></span>
+        </div>
+
         <form
-          th:action="${clase.id} ? @{/clases/editar/{id}(id=${clase.id})} : @{/clases/nuevo}"
+          th:action="${clase.id} ? @{/clases/editar/{id}(id=${clase.id})} : @{/clases/guardar}"
           th:object="${clase}"
           method="POST"
           class="formulario"
@@ -81,13 +85,14 @@
               id="diaSemana"
               th:field="*{diaSemana}"
               th:class="${#fields.hasErrors('diaSemana')} ? 'input-error' : ''"
+              class="form-control"
               required
             >
               <option value="">Seleccione un día</option>
               <option
                 th:each="dia : ${diasSemana}"
-                th:value="${dia}"
-                th:text="${#strings.capitalize(#strings.toLowerCase(dia))}"
+                th:value="${dia.name()}"
+                th:text="${dia.descripcion}"
               ></option>
             </select>
             <span

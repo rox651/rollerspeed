@@ -21,7 +21,7 @@ public class Instructor extends Usuario {
 
     private boolean disponible = true;
 
-    // Getters y Setters específicos de Instructor
+    // Getters y Setters
     public String getEspecialidad() {
         return especialidad;
     }

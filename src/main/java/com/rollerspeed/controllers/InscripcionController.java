@@ -119,19 +119,6 @@ public class InscripcionController {
         return "redirect:/inscripciones";
     }
 
-    @PostMapping("/{id}/cambiar-estado")
-    public String cambiarEstadoInscripcion(@PathVariable Long id,
-            @RequestParam EstadoInscripcion estado,
-            RedirectAttributes redirectAttributes) {
-        try {
-            inscripcionService.actualizarEstadoInscripcion(id, estado);
-            redirectAttributes.addFlashAttribute("mensaje", "Estado de inscripción actualizado exitosamente");
-        } catch (RuntimeException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-        }
-        return "redirect:/inscripciones";
-    }
-
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
         Optional<Inscripcion> inscripcionOpt = inscripcionService.obtenerInscripcionPorId(id);

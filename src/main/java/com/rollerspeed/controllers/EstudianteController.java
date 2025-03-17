@@ -99,11 +99,11 @@ public class EstudianteController {
         }
     }
 
-    @PostMapping("/desactivar/{id}")
-    public String desactivarEstudiante(@PathVariable Long id,
+    @PostMapping("/eliminar/{id}")
+    public String eliminarEstudiante(@PathVariable Long id,
             RedirectAttributes redirectAttributes) {
-        estudianteService.desactivarEstudiante(id);
-        redirectAttributes.addFlashAttribute("mensaje", "Estudiante desactivado exitosamente");
+        estudianteService.eliminarEstudiante(id);
+        redirectAttributes.addFlashAttribute("mensaje", "Estudiante eliminado exitosamente");
         return "redirect:/estudiantes";
     }
 

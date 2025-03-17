@@ -2,15 +2,12 @@ package com.rollerspeed.services;
 
 import com.rollerspeed.models.Estudiante;
 import com.rollerspeed.models.Inscripcion;
-import com.rollerspeed.models.Inscripcion.EstadoInscripcion;
 import com.rollerspeed.repositories.EstudianteRepository;
 import com.rollerspeed.repositories.InscripcionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,14 +90,13 @@ public class EstudianteService {
     }
 
     @Transactional
-    public void desactivarEstudiante(Long id) {
+    public void eliminarEstudiante(Long id) {
         estudianteRepository.findById(id)
                 .ifPresent(estudiante -> {
                     List<Inscripcion> inscripciones = inscripcionRepository.findByEstudianteId(id);
                     inscripcionRepository.deleteAll(inscripciones);
 
-                    estudiante.setActivo(false);
-                    estudianteRepository.save(estudiante);
+                    estudianteRepository.delete(estudiante);
                 });
     }
 }

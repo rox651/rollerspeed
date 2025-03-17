@@ -12,10 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.DayOfWeek;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 @Controller
 @RequestMapping("/clases")
 public class ClaseController {
@@ -46,42 +42,47 @@ public class ClaseController {
     public String mostrarFormularioNuevo(Model model) {
         model.addAttribute("clase", new Clase());
         model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
-
-        // Crear mapa de días traducidos
-        Map<DayOfWeek, String> diasSemana = new LinkedHashMap<>();
-        diasSemana.put(DayOfWeek.MONDAY, "Lunes");
-        diasSemana.put(DayOfWeek.TUESDAY, "Martes");
-        diasSemana.put(DayOfWeek.WEDNESDAY, "Miércoles");
-        diasSemana.put(DayOfWeek.THURSDAY, "Jueves");
-        diasSemana.put(DayOfWeek.FRIDAY, "Viernes");
-        diasSemana.put(DayOfWeek.SATURDAY, "Sábado");
-        diasSemana.put(DayOfWeek.SUNDAY, "Domingo");
-
-        model.addAttribute("diasSemana", diasSemana);
+        model.addAttribute("diasSemana", Clase.DiaSemana.values());
         return "clases/formulario";
     }
 
-    @PostMapping("/nuevo")
-    public String guardarClase(
-            @Valid @ModelAttribute Clase clase,
+    @PostMapping("/guardar")
+    public String guardarClase(@Valid @ModelAttribute Clase clase,
             BindingResult result,
-            RedirectAttributes redirectAttributes,
-            Model model) {
-
-        if (result.hasErrors()) {
-            model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
-            model.addAttribute("diasSemana", DayOfWeek.values());
-            return "clases/formulario";
-        }
-
+            Model model,
+            RedirectAttributes redirectAttributes) {
         try {
+            if (result.hasErrors()) {
+                model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
+                model.addAttribute("diasSemana", Clase.DiaSemana.values());
+                model.addAttribute("error", "Por favor corrija los errores en el formulario");
+                return "clases/formulario";
+            }
+
+            // Validación del día de la semana
+            if (clase.getDiaSemana() == null) {
+                result.rejectValue("diaSemana", "error.clase", "El día de la semana es obligatorio");
+                model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
+                model.addAttribute("diasSemana", Clase.DiaSemana.values());
+                return "clases/formulario";
+            }
+
+            // Validación de horario
+            if (clase.getHoraInicio() != null && clase.getHoraFin() != null &&
+                    clase.getHoraInicio().isAfter(clase.getHoraFin())) {
+                result.rejectValue("horaInicio", "error.clase", "La hora de inicio debe ser anterior a la hora de fin");
+                model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
+                model.addAttribute("diasSemana", Clase.DiaSemana.values());
+                return "clases/formulario";
+            }
+
             claseService.guardarClase(clase);
             redirectAttributes.addFlashAttribute("mensaje", "Clase guardada exitosamente");
             return "redirect:/clases";
         } catch (Exception e) {
-            result.rejectValue("horaInicio", "error.clase", e.getMessage());
+            model.addAttribute("error", "Error al guardar la clase: " + e.getMessage());
             model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
-            model.addAttribute("diasSemana", DayOfWeek.values());
+            model.addAttribute("diasSemana", Clase.DiaSemana.values());
             return "clases/formulario";
         }
     }
@@ -92,7 +93,7 @@ public class ClaseController {
                 .ifPresent(clase -> {
                     model.addAttribute("clase", clase);
                     model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
-                    model.addAttribute("diasSemana", DayOfWeek.values());
+                    model.addAttribute("diasSemana", Clase.DiaSemana.values());
                 });
         return "clases/formulario";
     }
@@ -105,7 +106,7 @@ public class ClaseController {
             Model model) {
         if (result.hasErrors()) {
             model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
-            model.addAttribute("diasSemana", DayOfWeek.values());
+            model.addAttribute("diasSemana", Clase.DiaSemana.values());
             return "clases/formulario";
         }
 
@@ -116,16 +117,16 @@ public class ClaseController {
         } catch (RuntimeException e) {
             result.rejectValue("horaInicio", "error.clase", e.getMessage());
             model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
-            model.addAttribute("diasSemana", DayOfWeek.values());
+            model.addAttribute("diasSemana", Clase.DiaSemana.values());
             return "clases/formulario";
         }
     }
 
-    @PostMapping("/desactivar/{id}")
-    public String desactivarClase(@PathVariable Long id,
+    @PostMapping("/eliminar/{id}")
+    public String eliminarClase(@PathVariable Long id,
             RedirectAttributes redirectAttributes) {
-        claseService.desactivarClase(id);
-        redirectAttributes.addFlashAttribute("mensaje", "Clase desactivada exitosamente");
+        claseService.eliminarClase(id);
+        redirectAttributes.addFlashAttribute("mensaje", "Clase eliminada exitosamente");
         return "redirect:/clases";
     }
 
