@@ -30,20 +30,12 @@ public class EstudianteController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar estudiantes", description = "Obtiene una lista de todos los estudiantes")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de estudiantes obtenida exitosamente")
-    })
     public String listarEstudiantes(Model model) {
         model.addAttribute("estudiantes", estudianteService.obtenerTodosLosEstudiantes());
         return "estudiantes/lista";
     }
 
     @GetMapping("/nuevo")
-    @Operation(summary = "Mostrar formulario de nuevo estudiante", description = "Muestra el formulario para crear un nuevo estudiante")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Formulario mostrado exitosamente")
-    })
     public String mostrarFormularioNuevo(Model model) {
         model.addAttribute("estudiante", new Estudiante());
         model.addAttribute("generos", Usuario.Genero.values());
@@ -51,11 +43,6 @@ public class EstudianteController {
     }
 
     @PostMapping("/nuevo")
-    @Operation(summary = "Guardar nuevo estudiante", description = "Guarda un nuevo estudiante en el sistema")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Estudiante guardado exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos del estudiante inválidos")
-    })
     public String guardarEstudiante(
             @Parameter(description = "Datos del estudiante a guardar") @Valid @ModelAttribute Estudiante estudiante,
             BindingResult result,
@@ -82,11 +69,6 @@ public class EstudianteController {
     }
 
     @GetMapping("/editar/{id}")
-    @Operation(summary = "Mostrar formulario de edición", description = "Muestra el formulario para editar un estudiante existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Formulario mostrado exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Estudiante no encontrado")
-    })
     public String mostrarFormularioEditar(
             @Parameter(description = "ID del estudiante a editar") @PathVariable Long id,
             Model model) {
@@ -99,12 +81,6 @@ public class EstudianteController {
     }
 
     @PostMapping("/editar/{id}")
-    @Operation(summary = "Actualizar estudiante", description = "Actualiza los datos de un estudiante existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Estudiante actualizado exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos del estudiante inválidos"),
-            @ApiResponse(responseCode = "404", description = "Estudiante no encontrado")
-    })
     public String actualizarEstudiante(
             @Parameter(description = "ID del estudiante a actualizar") @PathVariable Long id,
             @Parameter(description = "Datos actualizados del estudiante") @Valid @ModelAttribute Estudiante estudiante,
@@ -132,11 +108,6 @@ public class EstudianteController {
     }
 
     @PostMapping("/eliminar/{id}")
-    @Operation(summary = "Eliminar estudiante", description = "Elimina un estudiante del sistema")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Estudiante eliminado exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Estudiante no encontrado")
-    })
     public String eliminarEstudiante(
             @Parameter(description = "ID del estudiante a eliminar") @PathVariable Long id,
             RedirectAttributes redirectAttributes) {

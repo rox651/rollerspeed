@@ -33,10 +33,6 @@ public class ClaseController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar clases", description = "Obtiene una lista de todas las clases o solo las disponibles")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de clases obtenida exitosamente")
-    })
     public String listarClases(@RequestParam(required = false) Boolean soloDisponibles, Model model) {
         if (Boolean.TRUE.equals(soloDisponibles)) {
             model.addAttribute("clases", claseService.buscarClasesDisponibles());
@@ -49,10 +45,6 @@ public class ClaseController {
     }
 
     @GetMapping("/nuevo")
-    @Operation(summary = "Mostrar formulario de nueva clase", description = "Muestra el formulario para crear una nueva clase")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Formulario mostrado exitosamente")
-    })
     public String mostrarFormularioNuevo(Model model) {
         model.addAttribute("clase", new Clase());
         model.addAttribute("instructores", instructorService.obtenerTodosLosInstructores());
@@ -61,11 +53,6 @@ public class ClaseController {
     }
 
     @PostMapping("/guardar")
-    @Operation(summary = "Guardar nueva clase", description = "Guarda una nueva clase en el sistema")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Clase guardada exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos de la clase inválidos")
-    })
     public String guardarClase(@Valid @ModelAttribute Clase clase,
             BindingResult result,
             Model model,
@@ -107,11 +94,6 @@ public class ClaseController {
     }
 
     @GetMapping("/editar/{id}")
-    @Operation(summary = "Mostrar formulario de edición", description = "Muestra el formulario para editar una clase existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Formulario mostrado exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Clase no encontrada")
-    })
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
         claseService.obtenerClasePorId(id)
                 .ifPresent(clase -> {
@@ -123,12 +105,6 @@ public class ClaseController {
     }
 
     @PostMapping("/editar/{id}")
-    @Operation(summary = "Actualizar clase", description = "Actualiza los datos de una clase existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Clase actualizada exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos de la clase inválidos"),
-            @ApiResponse(responseCode = "404", description = "Clase no encontrada")
-    })
     public String actualizarClase(@PathVariable Long id,
             @Parameter(description = "Datos actualizados de la clase") @Valid @ModelAttribute Clase clase,
             BindingResult result,
@@ -153,11 +129,6 @@ public class ClaseController {
     }
 
     @PostMapping("/eliminar/{id}")
-    @Operation(summary = "Eliminar clase", description = "Elimina una clase del sistema")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Clase eliminada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Clase no encontrada")
-    })
     public String eliminarClase(@PathVariable Long id,
             RedirectAttributes redirectAttributes) {
         claseService.eliminarClase(id);

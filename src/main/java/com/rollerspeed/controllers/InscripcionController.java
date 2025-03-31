@@ -5,11 +5,8 @@ import com.rollerspeed.models.Inscripcion.EstadoInscripcion;
 import com.rollerspeed.services.ClaseService;
 import com.rollerspeed.services.EstudianteService;
 import com.rollerspeed.services.InscripcionService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,20 +36,12 @@ public class InscripcionController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar inscripciones", description = "Obtiene una lista de todas las inscripciones")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de inscripciones obtenida exitosamente")
-    })
     public String listarInscripciones(Model model) {
         model.addAttribute("inscripciones", inscripcionService.obtenerTodasLasInscripciones());
         return "inscripciones/lista";
     }
 
     @GetMapping("/nuevo")
-    @Operation(summary = "Mostrar formulario de nueva inscripción", description = "Muestra el formulario para crear una nueva inscripción")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Formulario mostrado exitosamente")
-    })
     public String mostrarFormularioNuevo(Model model) {
         model.addAttribute("inscripcion", new Inscripcion());
         model.addAttribute("estudiantes", estudianteService.obtenerTodosLosEstudiantes());
@@ -62,11 +51,6 @@ public class InscripcionController {
     }
 
     @PostMapping("/nuevo")
-    @Operation(summary = "Guardar nueva inscripción", description = "Guarda una nueva inscripción en el sistema")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Inscripción guardada exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos de la inscripción inválidos")
-    })
     public String guardarInscripcion(
             @Parameter(description = "Datos de la inscripción a guardar") @Valid @ModelAttribute Inscripcion inscripcion,
             BindingResult result,
@@ -94,12 +78,6 @@ public class InscripcionController {
     }
 
     @PostMapping("/inscribir")
-    @Operation(summary = "Inscribir estudiante", description = "Inscribe un estudiante en una clase específica")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Estudiante inscrito exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Error en la inscripción"),
-            @ApiResponse(responseCode = "404", description = "Estudiante o clase no encontrado")
-    })
     public String inscribirEstudiante(
             @Parameter(description = "ID del estudiante a inscribir") @RequestParam Long estudianteId,
             @Parameter(description = "ID de la clase en la que se inscribirá") @RequestParam Long claseId,
@@ -114,11 +92,6 @@ public class InscripcionController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Ver detalle de inscripción", description = "Muestra los detalles de una inscripción específica")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Detalles de la inscripción obtenidos exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Inscripción no encontrada")
-    })
     public String verDetalleInscripcion(
             @Parameter(description = "ID de la inscripción a consultar") @PathVariable Long id,
             Model model) {
@@ -128,11 +101,6 @@ public class InscripcionController {
     }
 
     @PostMapping("/cancelar/{id}")
-    @Operation(summary = "Cancelar inscripción", description = "Cancela una inscripción específica")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Inscripción cancelada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Inscripción no encontrada")
-    })
     public String cancelarInscripcion(
             @Parameter(description = "ID de la inscripción a cancelar") @PathVariable Long id,
             RedirectAttributes redirectAttributes) {
@@ -146,11 +114,6 @@ public class InscripcionController {
     }
 
     @PostMapping("/{id}/finalizar")
-    @Operation(summary = "Finalizar inscripción", description = "Marca una inscripción como finalizada")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Inscripción finalizada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Inscripción no encontrada")
-    })
     public String finalizarInscripcion(
             @Parameter(description = "ID de la inscripción a finalizar") @PathVariable Long id,
             RedirectAttributes redirectAttributes) {
@@ -164,11 +127,6 @@ public class InscripcionController {
     }
 
     @GetMapping("/editar/{id}")
-    @Operation(summary = "Mostrar formulario de edición", description = "Muestra el formulario para editar una inscripción existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Formulario mostrado exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Inscripción no encontrada")
-    })
     public String mostrarFormularioEditar(
             @Parameter(description = "ID de la inscripción a editar") @PathVariable Long id,
             Model model) {
@@ -185,12 +143,6 @@ public class InscripcionController {
     }
 
     @PostMapping("/editar/{id}")
-    @Operation(summary = "Actualizar inscripción", description = "Actualiza los datos de una inscripción existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Inscripción actualizada exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos de la inscripción inválidos"),
-            @ApiResponse(responseCode = "404", description = "Inscripción no encontrada")
-    })
     public String actualizarInscripcion(
             @Parameter(description = "ID de la inscripción a actualizar") @PathVariable Long id,
             @Parameter(description = "Datos actualizados de la inscripción") @Valid @ModelAttribute Inscripcion inscripcion,
