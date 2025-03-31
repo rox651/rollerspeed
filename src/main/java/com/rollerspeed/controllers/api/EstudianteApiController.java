@@ -9,8 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +42,7 @@ public class EstudianteApiController {
 
     @PostMapping
     @Operation(summary = "Crear estudiante", description = "Crea un nuevo estudiante en el sistema")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del estudiante a crear", required = true, content = @Content(mediaType = "application/json", examples = @ExampleObject(name = "Ejemplo de estudiante", value = """
+    @RequestBody(description = "Datos del estudiante a crear", required = true, content = @Content(mediaType = "application/json", examples = @ExampleObject(name = "Ejemplo de estudiante", value = """
             {
                 "nombre": "Juan Pérez",
                 "email": "juan.perez@email.com",
@@ -58,7 +58,7 @@ public class EstudianteApiController {
             @ApiResponse(responseCode = "400", description = "Datos del estudiante inválidos")
     })
     public ResponseEntity<?> crearEstudiante(
-            @Parameter(description = "Datos del estudiante a crear") @Valid @RequestBody Estudiante estudiante) {
+            @org.springframework.web.bind.annotation.RequestBody @Valid Estudiante estudiante) {
         try {
             Estudiante nuevoEstudiante = estudianteService.guardarEstudiante(estudiante);
             return ResponseEntity.ok(nuevoEstudiante);
@@ -83,6 +83,18 @@ public class EstudianteApiController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar estudiante", description = "Actualiza los datos de un estudiante existente")
+    @RequestBody(description = "Datos del estudiante a actualizar", required = true, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = """
+            {
+                "nombre": "Juan Pérez",
+                "email": "juan.perez@email.com",
+                "telefono": "123456789",
+                "edad": 15,
+                "genero": "M",
+                "nivel": "PRINCIPIANTE",
+                "fechaInicio": "2025-03-31",
+                "activo": true
+            }
+            """)))
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Estudiante actualizado exitosamente"),
             @ApiResponse(responseCode = "400", description = "Datos del estudiante inválidos"),
@@ -90,7 +102,7 @@ public class EstudianteApiController {
     })
     public ResponseEntity<?> actualizarEstudiante(
             @Parameter(description = "ID del estudiante a actualizar") @PathVariable Long id,
-            @Parameter(description = "Datos actualizados del estudiante") @Valid @RequestBody Estudiante estudiante) {
+            @org.springframework.web.bind.annotation.RequestBody @Valid Estudiante estudiante) {
         try {
             Estudiante estudianteActualizado = estudianteService.actualizarEstudiante(id, estudiante);
             return ResponseEntity.ok(estudianteActualizado);

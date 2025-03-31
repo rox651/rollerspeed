@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.validation.Valid;
@@ -49,7 +50,7 @@ public class InscripcionApiController {
 
     @PostMapping
     @Operation(summary = "Crear inscripción", description = "Crea una nueva inscripción en el sistema")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos de la inscripción a crear", required = true, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = """
+    @RequestBody(description = "Datos de la inscripción a crear", required = true, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = """
             {
                 "estudiante": {"id": 1},
                 "clase": {"id": 1},
@@ -61,7 +62,7 @@ public class InscripcionApiController {
             @ApiResponse(responseCode = "400", description = "Datos de la inscripción inválidos")
     })
     public ResponseEntity<?> crearInscripcion(
-            @Valid @RequestBody Inscripcion inscripcion) {
+            @org.springframework.web.bind.annotation.RequestBody @Valid Inscripcion inscripcion) {
         try {
             Inscripcion nuevaInscripcion = inscripcionService.guardarInscripcion(inscripcion);
             return ResponseEntity.ok(nuevaInscripcion);

@@ -67,7 +67,7 @@ public class ClaseApiController {
             @ApiResponse(responseCode = "400", description = "Datos de la clase inválidos")
     })
     public ResponseEntity<?> crearClase(
-            @Parameter(description = "Datos de la clase a crear") @Valid @RequestBody Clase clase) {
+            @org.springframework.web.bind.annotation.RequestBody @Valid Clase clase) {
         try {
             // Validaciones
             if (clase.getDiaSemana() == null) {
@@ -104,14 +104,29 @@ public class ClaseApiController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar clase", description = "Actualiza los datos de una clase existente")
+    @RequestBody(description = "Datos de la clase a actualizar", required = true, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = """
+            {
+                "nombre": "Patinaje Básico",
+                "descripcion": "Clase de patinaje para principiantes",
+                "diaSemana": "LUNES",
+                "horaInicio": "09:00",
+                "horaFin": "10:30",
+                "capacidadMaxima": 15,
+                "nivel": "PRINCIPIANTE",
+                "instructor": {
+                    "id": 1
+                },
+                "activo": true
+            }
+            """)))
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Clase actualizada exitosamente"),
             @ApiResponse(responseCode = "400", description = "Datos de la clase inválidos"),
             @ApiResponse(responseCode = "404", description = "Clase no encontrada")
     })
     public ResponseEntity<?> actualizarClase(
-            @Parameter(description = "ID de la clase a actualizar") @PathVariable Long id,
-            @Parameter(description = "Datos actualizados de la clase") @Valid @RequestBody Clase clase) {
+            @PathVariable Long id,
+            @org.springframework.web.bind.annotation.RequestBody @Valid Clase clase) {
         try {
             Clase claseActualizada = claseService.actualizarClase(id, clase);
             return ResponseEntity.ok(claseActualizada);
