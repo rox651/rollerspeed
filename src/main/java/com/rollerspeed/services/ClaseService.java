@@ -1,7 +1,6 @@
 package com.rollerspeed.services;
 
 import com.rollerspeed.models.Clase;
-import com.rollerspeed.models.Instructor;
 import com.rollerspeed.models.Inscripcion;
 import com.rollerspeed.models.Horario;
 import com.rollerspeed.repositories.ClaseRepository;
@@ -11,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
