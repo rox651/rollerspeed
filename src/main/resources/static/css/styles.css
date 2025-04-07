@@ -30,7 +30,7 @@
   --space-xl: 3rem; /* 48px */
   --space-xxl: 4rem; /* 64px */
 
-  --header-height: 5rem;
+  --header-height: 12rem;
 }
 
 * {
@@ -97,7 +97,7 @@ h2 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: var(--fs-md);
+  font-size: var(--fs-base);
   font-weight: 600;
   transition: all 0.3s ease;
 }
@@ -1103,5 +1103,68 @@ footer {
     --fs-xxl: 2rem; /* 32px */
     --fs-xl: 1.75rem; /* 28px */
     --fs-lg: 1.25rem; /* 20px */
+  }
+}
+
+/* Navigation auth buttons */
+.nav-auth {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.btn-login,
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-login {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-logout {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-login:hover {
+  background-color: #0056b3;
+}
+
+.btn-logout:hover {
+  background-color: #c82333;
+}
+
+.logout-form {
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-auth {
+    margin: 1rem 0;
+    justify-content: center;
+  }
+
+  .btn-login,
+  .btn-logout {
+    width: 100%;
+    justify-content: center;
   }
 }

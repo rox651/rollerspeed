@@ -1,144 +1,177 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-   <!-- Head Fragment -->
-   <head th:fragment="head(title)">
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title th:text="${title} + ' - Roller Speed'">Roller Speed</title>
-      <link rel="stylesheet" th:href="@{/css/styles.css}" />
-   </head>
+  <!-- Head Fragment -->
+  <head th:fragment="head(title)">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title} + ' - Roller Speed'">Roller Speed</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
 
-   <body>
-      <header th:fragment="navbar(activeTab)">
-         <div class="container">
-            <div class="logo">
-               <h1>Roller Speed</h1>
-            </div>
+  <body>
+    <header th:fragment="navbar(activeTab)">
+      <div class="container">
+        <div class="logo">
+          <h1>Roller Speed</h1>
+        </div>
 
-            <nav>
-               <ul class="nav-main">
-                  <li>
-                     <a
-                        href="/"
-                        th:classappend="${activeTab == 'inicio'} ? 'active'"
-                        th:aria-current="${activeTab == 'inicio'} ? 'page'"
-                        >Inicio</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/mision"
-                        th:classappend="${activeTab == 'mision'} ? 'active'"
-                        th:aria-current="${activeTab == 'mision'} ? 'page'"
-                        >Misión</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/vision"
-                        th:classappend="${activeTab == 'vision'} ? 'active'"
-                        th:aria-current="${activeTab == 'vision'} ? 'page'"
-                     >
-                        Visión</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/valores"
-                        th:classappend="${activeTab == 'valores'} ? 'active'"
-                        th:aria-current="${activeTab == 'valores'} ? 'page'"
-                        >Valores
-                     </a>
-                  </li>
-                  <li>
-                     <a
-                        href="/servicios"
-                        th:classappend="${activeTab == 'servicios'} ? 'active'"
-                        th:aria-current="${activeTab == 'servicios'} ? 'page'"
-                        >Servicios</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/eventos"
-                        th:classappend="${activeTab == 'eventos'} ? 'active'"
-                        th:aria-current="${activeTab == 'eventos'} ? 'page'"
-                        >Eventos</a
-                     >
-                  </li>
-               </ul>
+        <nav>
+          <ul class="nav-main">
+            <li>
+              <a
+                href="/"
+                th:classappend="${activeTab == 'inicio'} ? 'active'"
+                th:aria-current="${activeTab == 'inicio'} ? 'page'"
+                >Inicio</a
+              >
+            </li>
+            <li>
+              <a
+                href="/mision"
+                th:classappend="${activeTab == 'mision'} ? 'active'"
+                th:aria-current="${activeTab == 'mision'} ? 'page'"
+                >Misión</a
+              >
+            </li>
+            <li>
+              <a
+                href="/vision"
+                th:classappend="${activeTab == 'vision'} ? 'active'"
+                th:aria-current="${activeTab == 'vision'} ? 'page'"
+              >
+                Visión</a
+              >
+            </li>
+            <li>
+              <a
+                href="/valores"
+                th:classappend="${activeTab == 'valores'} ? 'active'"
+                th:aria-current="${activeTab == 'valores'} ? 'page'"
+                >Valores
+              </a>
+            </li>
+            <li>
+              <a
+                href="/servicios"
+                th:classappend="${activeTab == 'servicios'} ? 'active'"
+                th:aria-current="${activeTab == 'servicios'} ? 'page'"
+                >Servicios</a
+              >
+            </li>
+            <li>
+              <a
+                href="/eventos"
+                th:classappend="${activeTab == 'eventos'} ? 'active'"
+                th:aria-current="${activeTab == 'eventos'} ? 'page'"
+                >Eventos</a
+              >
+            </li>
+          </ul>
 
-               <!-- Nueva sección de gestión -->
-               <ul
-                  class="nav-management"
-                  th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-               >
-                  <li>
-                     <a
-                        href="/clases"
-                        th:classappend="${activeTab == 'clases'} ? 'active'"
-                        th:aria-current="${activeTab == 'clases'} ? 'page'"
-                        >Clases</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/estudiantes"
-                        th:classappend="${activeTab == 'estudiantes'} ? 'active'"
-                        th:aria-current="${activeTab == 'estudiantes'} ? 'page'"
-                        >Estudiantes</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/inscripciones"
-                        th:classappend="${activeTab == 'inscripciones'} ? 'active'"
-                        th:aria-current="${activeTab == 'inscripciones'} ? 'page'"
-                        >Inscripciones</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/horarios"
-                        th:classappend="${activeTab == 'horarios'} ? 'active'"
-                        th:aria-current="${activeTab == 'horarios'} ? 'page'"
-                        >Horarios</a
-                     >
-                  </li>
-                  <li>
-                     <a
-                        href="/instructores"
-                        th:classappend="${activeTab == 'instructores'} ? 'active'"
-                        th:aria-current="${activeTab == 'instructores'} ? 'page'"
-                        >Instructores</a
-                     >
-                  </li>
-               </ul>
-            </nav>
-         </div>
-      </header>
+          <!-- Nueva sección de gestión -->
+          <ul
+            class="nav-management"
+            th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+          >
+            <li>
+              <a
+                href="/admin/dashboard"
+                th:classappend="${activeTab == 'admin'} ? 'active'"
+                th:aria-current="${activeTab == 'admin'} ? 'page'"
+              >
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                href="/clases"
+                th:classappend="${activeTab == 'clases'} ? 'active'"
+                th:aria-current="${activeTab == 'clases'} ? 'page'"
+                >Clases</a
+              >
+            </li>
+            <li>
+              <a
+                href="/estudiantes"
+                th:classappend="${activeTab == 'estudiantes'} ? 'active'"
+                th:aria-current="${activeTab == 'estudiantes'} ? 'page'"
+                >Estudiantes</a
+              >
+            </li>
+            <li>
+              <a
+                href="/inscripciones"
+                th:classappend="${activeTab == 'inscripciones'} ? 'active'"
+                th:aria-current="${activeTab == 'inscripciones'} ? 'page'"
+                >Inscripciones</a
+              >
+            </li>
+            <li>
+              <a
+                href="/horarios"
+                th:classappend="${activeTab == 'horarios'} ? 'active'"
+                th:aria-current="${activeTab == 'horarios'} ? 'page'"
+                >Horarios</a
+              >
+            </li>
+            <li>
+              <a
+                href="/instructores"
+                th:classappend="${activeTab == 'instructores'} ? 'active'"
+                th:aria-current="${activeTab == 'instructores'} ? 'page'"
+                >Instructores</a
+              >
+            </li>
+          </ul>
 
-      <!-- Footer Fragment -->
-      <footer th:fragment="footer">
-         <div class="container">
-            <div class="footer-content">
-               <div class="footer-logo">
-                  <h3>Roller Speed</h3>
-               </div>
-               <div class="footer-links">
-                  <ul>
-                     <li><a href="/">Inicio</a></li>
-                     <li><a href="/mision">Misión</a></li>
-                     <li><a href="/vision">Visión</a></li>
-                     <li><a href="/valores">Valores</a></li>
-                     <li><a href="/eventos">Eventos</a></li>
-                  </ul>
-               </div>
-            </div>
-            <div class="footer-bottom">
-               <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
-            </div>
-         </div>
-      </footer>
-   </body>
+          <!-- Auth buttons -->
+          <div class="nav-auth">
+            <!-- Show login button when not authenticated -->
+            <a
+              th:unless="${#authorization.expression('isAuthenticated()')}"
+              href="/login"
+              class="btn btn-login"
+            >
+              <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </a>
+
+            <!-- Show logout button when authenticated -->
+            <form
+              th:if="${#authorization.expression('isAuthenticated()')}"
+              th:action="@{/logout}"
+              method="post"
+              class="logout-form"
+            >
+              <button type="submit" class="btn btn-logout">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Footer Fragment -->
+    <footer th:fragment="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h3>Roller Speed</h3>
+          </div>
+          <div class="footer-links">
+            <ul>
+              <li><a href="/">Inicio</a></li>
+              <li><a href="/mision">Misión</a></li>
+              <li><a href="/vision">Visión</a></li>
+              <li><a href="/valores">Valores</a></li>
+              <li><a href="/eventos">Eventos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

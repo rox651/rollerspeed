@@ -3,9 +3,12 @@
   <head th:replace="~{fragments/layout :: head('Instructores')}">
     <title>Instructores</title>
   </head>
-  <!-- Agregamos los estilos después del head para que no sean reemplazados -->
   <th:block>
     <link rel="stylesheet" th:href="@{/css/listas.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
   </th:block>
   <body>
     <header
@@ -20,7 +23,6 @@
         </a>
       </div>
 
-      <!-- Mensaje de éxito con animación -->
       <div th:if="${mensaje}" class="mensaje-exito animate-fade-in">
         <span th:text="${mensaje}"></span>
         <button
@@ -31,7 +33,6 @@
         </button>
       </div>
 
-      <!-- Tabla con diseño mejorado -->
       <div class="tabla-contenedor animate-fade-in">
         <table class="tabla-registros">
           <thead>
@@ -98,11 +99,5 @@
     </main>
 
     <footer th:replace="~{fragments/layout :: footer}"></footer>
-
-    <!-- Agregar Font Awesome para los iconos -->
-    <script
-      src="https://kit.fontawesome.com/tu-codigo-de-kit.js"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
